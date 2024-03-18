@@ -1,0 +1,50 @@
+.pokemon-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.pokemon-detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.pokemon-detail-content {
+  text-align: center;
+}
+
+.pokemon-image {
+  width: 200px; /* Adjust image size as needed */
+  height: auto;
+  margin: 1rem 0;
+}
+
+.button-container {
+  margin-top: 1rem;
+}
+
+.back-button,
+.fight-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.fight-button {
+  background-color: #f44336;
+}
+
+.back-button:hover,
+.fight-button:hover {
+  background-color: #45a049;
+}
