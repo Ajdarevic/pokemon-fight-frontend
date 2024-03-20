@@ -7,15 +7,26 @@
 }
 
 .pokemon-detail-title {
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
 .pokemon-detail-content {
+  margin-top: 3rem;
   text-align: center;
+  background: #eaeaea;
+  padding: 2rem;
 }
-
+.pokemon-detail-content .pokemon-name {
+  font-size: 3rem;
+}
+.pokemon-detail-content p {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  border: 0.1rem solid #666;
+  margin: 1rem 0;
+}
 .pokemon-image {
   width: 200px; /* Adjust image size as needed */
   height: auto;
@@ -24,19 +35,20 @@
 
 .button-container {
   margin-top: 1rem;
+  width: 100%;
+  text-align: center;
 }
-
 .back-button,
 .fight-button {
   background-color: #4caf50;
   border: none;
-  color: white;
-  padding: 0.5rem 1rem;
+  color: #fff;
+  padding: 1.5rem 1rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 1rem;
-  margin-right: 1rem;
+  margin: 1.5rem 1rem;
   cursor: pointer;
 }
 

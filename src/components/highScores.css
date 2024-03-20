@@ -1,0 +1,26 @@
+.highScores-container {
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+}
+.highScores-container-table {
+  margin: 5rem 0;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #000;
+  padding: 3rem;
+}
+.highScores-container-table th {
+  border: 2px solid #000;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+}
+.highScores-container-table td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  color: #000;
+}

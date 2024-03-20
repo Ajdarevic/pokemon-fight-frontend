@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import HighScores from "./HighScores"; // Import HighScores component
-//import "./FightPage.css"; // Import CSS file for styling
+import "./fightPage.css";
 
 const FightPage = () => {
   const navigate = useNavigate();
@@ -79,47 +79,64 @@ const FightPage = () => {
     <div className="fight-page-container">
       <h1 className="fight-page-title">Fight Page</h1>
       {pokemonData && opponentData ? (
-        <div className="fight-content">
-          <div className="pokemon-detail-content">
-            <h2 className="pokemon-name">{pokemonData.name}</h2>
-            <img
-              src={pokemonData.sprites.front_default}
-              alt={pokemonData.name}
-              className="pokemon-image"
-            />
-            {/* Display other details for player's Pokémon */}
+        <>
+          <div className="fight-content">
+            <div className="fight-page-content">
+              <h2 className="pokemon-name">{pokemonData.name}</h2>
+              <img
+                src={pokemonData.sprites.front_default}
+                alt={pokemonData.name}
+                className="pokemon-image"
+                width="150"
+                height="100"
+              />
+              {/* Display other details for player's Pokémon */}
+            </div>
+            <div className="fight-page-content">
+              <h2 className="opponent-name">{opponentData.name}</h2>
+              <img
+                src={opponentData.sprites.front_default}
+                alt={opponentData.name}
+                className="opponent-image"
+                width="150"
+                height="100"
+              />
+              {/* Display other details for opponent's Pokémon */}
+            </div>
           </div>
-          <div className="opponent-detail-content">
-            <h2 className="opponent-name">{opponentData.name}</h2>
-            <img
-              src={opponentData.sprites.front_default}
-              alt={opponentData.name}
-              className="opponent-image"
-            />
-            {/* Display other details for opponent's Pokémon */}
-          </div>
-          <div className="button-container">
+          <div className="fight-page-button-container">
             <button onClick={() => navigate("/")} className="back-button">
               Back to Pokemon List
             </button>
-            <button onClick={startFight} className="fight-button">
+            <button onClick={startFight} className="fight-button ">
               Start Fight
             </button>
-            {winner && (
-              <>
-                <img src={winner.sprites.front_default} alt={winner.name} />
-                <span>{winner.name}</span>
-              </>
-            )}
 
             {/* Link to HighScores component */}
             <Link to="/HighScores" className="highscores-button">
               High Scores
             </Link>
           </div>
-        </div>
+        </>
       ) : (
         <p>Loading...</p>
+      )}
+      {winner && (
+        <>
+          <div className="fight-content">
+            <div className="fight-page-content">
+              <h2>The Winner:</h2>
+              <h2 className="opponent-name">{winner.name}</h2>
+              <img
+                src={winner.sprites.front_default}
+                alt={winner.name}
+                className="opponent-image"
+                width="150"
+                height="200"
+              />
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

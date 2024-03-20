@@ -1,17 +1,19 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-//import "./PokemonList.css"; // Import CSS file for styling
+import "./pokemonList.css"; // Import CSS file for styling
 
 const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchPokemonList = async () => {
+      console.log(page);
       try {
         const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=20"
+          `https://pokeapi.co/api/v2/pokemon?offset=${page * 20}&limit=20`
         );
         const data = await response.json();
         setPokemonList(data.results);
@@ -21,7 +23,7 @@ const PokemonList = () => {
     };
 
     fetchPokemonList();
-  }, []);
+  }, [page]);
 
   const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -39,8 +41,16 @@ const PokemonList = () => {
         placeholder="Search Pokémon..."
         value={searchTerm}
         onChange={handleSearchInputChange}
-        className="search-bar"
+        className="pokemon-list-search-bar"
       />
+      <div className="button-container">
+        <Link to="/fight" className="button">
+          Start Fight
+        </Link>
+        <Link to="/highscores" className="button">
+          High Scores
+        </Link>
+      </div>
       <div className="pokemon-grid">
         {filteredPokemonList.map((pokemon) => (
           <div key={pokemon.name} className="pokemon-card">
@@ -58,12 +68,23 @@ const PokemonList = () => {
         ))}
       </div>
       <div className="button-container">
-        <Link to="/fight" className="button">
-          Start Fight
-        </Link>
-        <Link to="/highscores" className="button">
-          High Scores
-        </Link>
+        <button
+          className="pokemon-list-btn"
+          onClick={() => {
+            if (page > 1) setPage(page - 1);
+          }}
+        >
+          prev
+        </button>
+
+        <button
+          className="pokemon-list-btn"
+          onClick={() => {
+            if (page < 64) setPage(page + 1);
+          }}
+        >
+          next
+        </button>
       </div>
     </div>
   );

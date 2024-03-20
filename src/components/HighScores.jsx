@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link component for navigation
+import "./highScores.css";
 
 const HighScores = () => {
   const [highScores, setHighScores] = useState([]);
@@ -23,15 +24,30 @@ const HighScores = () => {
   }, []);
 
   return (
-    <div>
+    <div className="highScores-container">
       <h1>High Scores</h1>
-      <ol>
-        {highScores.map((score, index) => (
+      <table className="highScores-container-table">
+        <tr>
+          <th>playerName</th>
+          <th>score</th>
+          <th>winner</th>
+          <th>loser</th>
+        </tr>
+
+        <tr>
+          <td>playerName1</td>
+          <td>100</td>
+          <td>poke1</td>
+          <td>poke2</td>
+        </tr>
+      </table>
+
+      {/* {highScores.map((score, index) => (
           <li key={index}>
             {score.playerName} - {score.score}
           </li>
-        ))}
-      </ol>
+        ))} */}
+
       {/* Button to navigate back to PokemonList */}
       <Link to="/" className="back-button">
         Back to Pokemon List
