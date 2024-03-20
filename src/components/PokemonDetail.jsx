@@ -41,6 +41,8 @@ const PokemonDetail = () => {
             alt={pokemonData.name}
             className="pokemon-image"
           />
+          {console.log("POKEMON DATA: ", pokemonData)}
+          <p>HP: {pokemonData.stats[0].base_stat}</p>
           <p>Height: {pokemonData.height}</p>
           <p>Weight: {pokemonData.weight}</p>
           <p>Attack: {pokemonData.stats[1].base_stat}</p>
@@ -51,7 +53,7 @@ const PokemonDetail = () => {
               Go Back to Pokemon List
             </button>
             <Link to={`/fight/${id}`} className="fight-button">
-              Fight
+              Random Opponent
             </Link>
           </div>
         </div>

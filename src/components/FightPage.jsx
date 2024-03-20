@@ -9,6 +9,8 @@ const FightPage = () => {
   const { id } = useParams(); // Retrieve the Pokémon ID from URL parameter
   const [pokemonData, setPokemonData] = useState(null);
   const [opponentData, setOpponentData] = useState(null);
+  const [winner, setWinner] = useState("");
+  const [loser, setLoser] = useState("");
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -38,6 +40,7 @@ const FightPage = () => {
           );
         }
         const data = await response.json();
+        console.log("THE OPPONENT DATA: ", data);
         setOpponentData(data);
       } catch (error) {
         console.error(error);
@@ -52,6 +55,24 @@ const FightPage = () => {
 
   const startFight = () => {
     // Logic to start the fight
+    const killTtimePokemon =
+      opponentData.stats[0].base_stat /
+      ((pokemonData.stats[5].base_stat * pokemonData.stats[1].base_stat) /
+        (opponentData.stats[2].base_stat / 230));
+
+    const killTtimeOpponent =
+      pokemonData.stats[0].base_stat /
+      ((opponentData.stats[5].base_stat * opponentData.stats[1].base_stat) /
+        (pokemonData.stats[2].base_stat / 230));
+
+    if (killTtimePokemon - killTtimeOpponent < 0) {
+      setWinner(pokemonData);
+      setLoser(opponentData);
+    } else {
+      setWinner(opponentData);
+      setLoser(pokemonData);
+    }
+    console.log("WINNER IS Chosen");
   };
 
   return (
@@ -84,6 +105,13 @@ const FightPage = () => {
             <button onClick={startFight} className="fight-button">
               Start Fight
             </button>
+            {winner && (
+              <>
+                <img src={winner.sprites.front_default} alt={winner.name} />
+                <span>{winner.name}</span>
+              </>
+            )}
+
             {/* Link to HighScores component */}
             <Link to="/HighScores" className="highscores-button">
               High Scores
