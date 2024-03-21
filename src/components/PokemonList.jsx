@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./pokemonList.css"; // Import CSS file for styling
@@ -7,10 +6,11 @@ const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
+  const [currentNameIndex, setCurrentNameIndex] = useState(0);
+  const names = ["Saeed", "Isak", "Ata", "Micha"];
 
   useEffect(() => {
     const fetchPokemonList = async () => {
-      console.log(page);
       try {
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon?offset=${page * 20}&limit=20`
@@ -25,17 +25,27 @@ const PokemonList = () => {
     fetchPokemonList();
   }, [page]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentNameIndex((prevIndex) =>
+        prevIndex === names.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 2000); // Switch name every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const filteredPokemonList = pokemonList.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+    pokemon.name.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   return (
     <div className="pokemon-list-container">
-      <h1 className="pokemon-list-title">Pokemon List</h1>
+      <h1 className="pokemon-list-title">Made by: {names[currentNameIndex]}</h1>
       <input
         type="text"
         placeholder="Search Pokémon..."
@@ -54,6 +64,7 @@ const PokemonList = () => {
       <div className="pokemon-grid">
         {filteredPokemonList.map((pokemon) => (
           <div key={pokemon.name} className="pokemon-card">
+            <span></span>
             <Link to={`/pokemon/${pokemon.name}`} className="pokemon-link">
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
