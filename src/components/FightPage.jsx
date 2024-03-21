@@ -12,6 +12,32 @@ const FightPage = () => {
   const [winner, setWinner] = useState("");
   const [loser, setLoser] = useState("");
 
+  const backgroundImage = [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg",
+    "5.jpg",
+    "6.jpg",
+    "7.jpg",
+    "8.jpg",
+    "9.jpg",
+    "10.jpg",
+    "11.jpg",
+    "12.jpg",
+    "arena2.jpg",
+    "arena3.jpg",
+  ];
+
+  const randomIndex = Math.floor(Math.random() * backgroundImage.length);
+
+  /*   function getRandomBackgroundImageUrl() {
+    const randomIndex = Math.floor(Math.random() * backgroundImage.length);
+    return backgroundImage[randomIndex];
+  }
+
+  const randomBackgroundUrl = getRandomBackgroundImageUrl(); */
+
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
@@ -76,12 +102,18 @@ const FightPage = () => {
   };
 
   return (
-    <div className="fight-page-container">
-      <h1 className="fight-page-title">Fight Page</h1>
+    <div
+      className="fight-page-container"
+      style={{
+        backgroundImage: `url("/${backgroundImage[randomIndex]}")`,
+        backgroundSize: "cover",
+      }}
+    >
+      <h1 className="fight-page-title">Fight</h1>
       {pokemonData && opponentData ? (
         <>
           <div className="fight-content">
-            <div className="fight-page-content">
+            <div className="pokemon-card">
               <h2 className="pokemon-name">{pokemonData.name}</h2>
               <img
                 src={pokemonData.sprites.front_default}
@@ -92,12 +124,12 @@ const FightPage = () => {
               />
               {/* Display other details for player's Pokémon */}
             </div>
-            <div className="fight-page-content">
+            <div className="pokemon-card">
               <h2 className="opponent-name">{opponentData.name}</h2>
               <img
                 src={opponentData.sprites.front_default}
                 alt={opponentData.name}
-                className="opponent-image"
+                className="pokemon-image"
                 width="150"
                 height="100"
               />
