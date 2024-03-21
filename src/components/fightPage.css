@@ -1,6 +1,6 @@
 .fight-page-container {
   margin: 0 auto;
-
+  height: 100vh;
   text-align: center;
   padding-top: 5rem;
   display: flex;
@@ -14,7 +14,6 @@
   flex-direction: row;
   justify-content: center;
   justify-items: center;
-  background: #fff;
   gap: 3rem;
 }
 
