@@ -8,11 +8,14 @@
 .pokemon-list-title {
   display: flex;
   justify-content: center;
-  color: rgb(201, 244, 201);
+  text-shadow: 0px 0px 5px #24ecff, 0px 0px 10px #24ecff, 0px 0px 10px #24ecff,
+    0px 0px 20px #24ecff;
   font-size: 8rem;
 }
 .pokemon-list-search-bar {
   border-radius: 20px;
+  box-shadow: 0px 0px 5px #24ecff, 0px 0px 10px #24ecff, 0px 0px 10px #24ecff,
+    0px 0px 20px #24ecff;
   width: 80rem;
   min-height: 4rem;
   font-weight: bold;
@@ -102,27 +105,32 @@
   margin: 1rem;
   width: 15rem;
   padding: 1rem;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bolder;
   color: #000000;
   border-radius: 20px;
-  background-color: #0f0;
+  background-color: #24ecff;
+  box-shadow: 0px 0px 5px #24ecff, 0px 0px 10px #24ecff, 0px 0px 10px #24ecff,
+    0px 0px 20px #24ecff;
   text-align: center;
   text-decoration: none;
 }
 .button-container .button:hover {
-  background-color: rgba(133, 236, 7, 0.865);
+  background-color: rgb(207, 212, 201);
 }
 .pokemon-list-btn {
   font-size: 2rem;
+  font-weight: bolder;
   display: inline-block;
   border-radius: 20px;
   width: 13rem;
   margin: 1rem;
   padding: 0.7rem;
-  background: #eaeaea;
+  /* background: #eaeaea; */
+  box-shadow: 0px 0px 5px #fff, 0px 0px 10px #24ecff, 0px 0px 10px #fff,
+    0px 0px 20px #fff;
 }
 
 .pokemon-list-btn:hover {
-  background-color: #fdfcfc30;
+  background-color: #24ecff;
 }

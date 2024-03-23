@@ -138,7 +138,7 @@ const FightPage = () => {
           </div>
           <div className="fight-page-button-container">
             <button onClick={() => navigate("/")} className="back-button">
-              Back to Pokemon List
+              home
             </button>
             <button onClick={startFight} className="fight-button ">
               Start Fight

@@ -7,7 +7,7 @@ const PokemonList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
   const [currentNameIndex, setCurrentNameIndex] = useState(0);
-  const names = ["Saeed", "Isak", "Ata", "Micha"];
+  const names = ["Saeed", "Isak", "Ata", "Michael"];
 
   useEffect(() => {
     const fetchPokemonList = async () => {
