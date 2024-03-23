@@ -74,6 +74,7 @@
   background: #000000;
   border-radius: 10px;
   position: relative;
+  width: auto;
   z-index: 2;
 }
 
@@ -100,6 +101,34 @@
   border-radius: 10px;
   max-width: 220px; /* Set a maximum width for the buttons */
   margin: 0 5px; /* Add margin between the buttons */
+}
+
+.highscore-button {
+  flex: 1; /* Distribute available space equally */
+  height: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  max-width: 220px; /* Set a maximum width for the buttons */
+  margin: 0 5px; /* Add margin between the buttons */
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #24ff5b;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
 }
 
 /*.back-button,
@@ -146,7 +175,8 @@
   font-size: 2rem;
 }
 
-.fight-button:before {
+.fight-button:before,
+.highscore-button:before {
   content: "";
   background: linear-gradient(
     45deg,
@@ -174,19 +204,23 @@
   border-radius: 10px;
 }
 
-.fight-button:active {
+.fight-button:active,
+.highscore-button:active {
   color: #000;
 }
 
-.fight-button:active:after {
+.fight-button:active:after,
+.highscore-button:active:after {
   background: transparent;
 }
 
-.fight-button:hover:before {
+.fight-button:hover:before,
+.highscore-button:hover:before {
   opacity: 1;
 }
 
-.fight-button:after {
+.fight-button:after,
+.highscore-button:after {
   z-index: -1;
   content: "";
   position: absolute;

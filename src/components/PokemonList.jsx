@@ -54,9 +54,9 @@ const PokemonList = () => {
         className="pokemon-list-search-bar"
       />
       <div className="button-container">
-        <Link to="/fight" className="button">
+        {/* <Link to="/fight" className="button">
           Start Fight
-        </Link>
+        </Link> */}
         <Link to="/highscores" className="button">
           High Scores
         </Link>
