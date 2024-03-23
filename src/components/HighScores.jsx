@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link component for navigation
 import "./highScores.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 const HighScores = () => {
   const [highScores, setHighScores] = useState([]);
@@ -24,7 +25,7 @@ const HighScores = () => {
   }, []);
 
   return (
-    <div className="highScores-container">
+    <div className="highScores-container" style={{ height: "100vh" }}>
       <h1>High Scores</h1>
       <table className="highScores-container-table">
         <tr>
@@ -50,8 +51,19 @@ const HighScores = () => {
 
       {/* Button to navigate back to PokemonList */}
       <Link to="/" className="back-button">
-        Back to Pokemon List
+        home
       </Link>
+      <div className="anime_container">
+        <div className="ring">
+          <i className="fas fa-star"></i>
+        </div>
+        <div className="ring">
+          <i className="fas fa-star"></i>
+        </div>
+        <div className="ring">
+          <i className="fas fa-star"></i>
+        </div>
+      </div>
     </div>
   );
 };

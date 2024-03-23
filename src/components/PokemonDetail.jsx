@@ -50,7 +50,7 @@ const PokemonDetail = () => {
           <p>Speed: {pokemonData.stats[5].base_stat}</p>
           <div className="button-container">
             <button onClick={goBackToList} className="back-button">
-              Go Back to Pokemon List
+              home
             </button>
             <Link to={`/fight/${id}`} className="fight-button">
               Random Opponent
