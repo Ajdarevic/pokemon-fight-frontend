@@ -145,7 +145,7 @@ const FightPage = () => {
             </button>
 
             {/* Link to HighScores component */}
-            <Link to="/HighScores" className="highscores-button">
+            <Link to="/HighScores" className="highscore-button ">
               High Scores
             </Link>
           </div>
@@ -156,13 +156,13 @@ const FightPage = () => {
       {winner && (
         <>
           <div className="fight-content">
-            <div className="fight-page-content">
-              <h2>The Winner:</h2>
+            <div className="pokemon-card">
+              <h2 className="winner-page-title opponent-name">The Winner is</h2>
               <h2 className="opponent-name">{winner.name}</h2>
               <img
                 src={winner.sprites.front_default}
                 alt={winner.name}
-                className="opponent-image"
+                className="pokemon-image"
                 width="150"
                 height="200"
               />
