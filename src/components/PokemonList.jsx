@@ -17,6 +17,7 @@ const PokemonList = () => {
         );
         const data = await response.json();
         setPokemonList(data.results);
+        console.log("DATA: ", data);
       } catch (error) {
         console.error("Error fetching Pokémon list:", error);
       }

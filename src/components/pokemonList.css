@@ -96,6 +96,11 @@
   text-decoration: none;
 }
 
+.pokemon-card:hover {
+  transform: scale(1.2); /* Increase size by 10% on hover */
+  transition: transform 0.3s ease;
+}
+
 .button-container {
   width: 50%;
   padding: 1rem;
