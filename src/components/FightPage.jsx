@@ -96,7 +96,7 @@ const FightPage = () => {
         sendWinnerToBackend(pokemonData.name, opponentData.name); // Send winner's name to backend
       }, 1000); // Delay winner display after loser animation
     }
-  };
+  }; //some comment
 
   const sendWinnerToBackend = async (winnerName, loserName) => {
     try {
