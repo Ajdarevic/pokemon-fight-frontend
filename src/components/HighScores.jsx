@@ -17,7 +17,7 @@ const HighScores = () => {
         );
         const data = await response.json();
         // Assuming the API returns an array of high scores
-        setHighScores(data);
+        setHighScores(data.data);
       } catch (error) {
         console.error("Error fetching high scores:", error);
       }
@@ -30,16 +30,23 @@ const HighScores = () => {
     <div className="highScores-container" style={{ height: "100vh" }}>
       <h1>High Scores</h1>
       <table className="highScores-container-table">
-        <tr>
-          <th>score</th>
-          <th>winner</th>
-          <th>loser</th>
-        </tr>
-        {highScores && (
+        <tbody>
           <tr>
-            highscores.map( (item) )<td></td>
+            <th>score</th>
+            <th>winner</th>
+            <th>loser</th>
           </tr>
-        )}
+          {highScores &&
+            highScores.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{item.point}</td>
+                  <td>{item.winer}</td>
+                  <td>{item.loser}</td>
+                </tr>
+              );
+            })}
+        </tbody>
       </table>
 
       {/* {highScores.map((score, index) => (
