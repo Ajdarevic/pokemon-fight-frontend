@@ -9,7 +9,7 @@ const FightPage = () => {
   const [opponentData, setOpponentData] = useState(null);
   const [winner, setWinner] = useState(null);
   const [loser, setLoser] = useState(null);
-  const [showFightText, setShowFightText] = useState(true); // State to control the visibility of "Fight" text
+  const [fightTextVisible, setFightTextVisible] = useState(true); // State to control visibility of fight text
 
   const backgroundImage = [
     "1.jpg",
@@ -85,14 +85,41 @@ const FightPage = () => {
       setLoser(opponentData);
       setTimeout(() => {
         setWinner(pokemonData);
-        setShowFightText(false); // Hide "Fight" text when winner is displayed
+        setFightTextVisible(false); // Hide fight text when winner is displayed
+        sendWinnerToBackend(pokemonData.name, opponentData.name); // Send winner's name to backend
       }, 1000); // Delay winner display after loser animation
     } else {
       setLoser(pokemonData);
       setTimeout(() => {
         setWinner(opponentData);
-        setShowFightText(false); // Hide "Fight" text when winner is displayed
+        setFightTextVisible(false); // Hide fight text when winner is displayed
+        sendWinnerToBackend(pokemonData.name, opponentData.name); // Send winner's name to backend
       }, 1000); // Delay winner display after loser animation
+    }
+  };
+
+  const sendWinnerToBackend = async (winnerName, loserName) => {
+    try {
+      const response = await fetch(
+        "https://pokemon-api-vmgy.onrender.com/fight-result",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            winer: winnerName,
+            loser: loserName,
+            point: 1,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to send winner data to backend");
+      }
+      console.log("Winner data sent to backend successfully");
+    } catch (error) {
+      console.error("Error sending winner data to backend:", error);
     }
   };
 
@@ -104,7 +131,7 @@ const FightPage = () => {
         backgroundSize: "cover",
       }}
     >
-      {showFightText && <h1 className="fight-page-title">Fight</h1>}
+      {fightTextVisible && <h1 className="fight-page-title">Fight</h1>}
       {pokemonData && opponentData && !winner && (
         <div className="fight-content">
           <div className={`pokemon-card ${loser ? "loser-animation" : ""}`}>
