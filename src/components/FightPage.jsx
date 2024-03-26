@@ -1,16 +1,15 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import HighScores from "./HighScores"; // Import HighScores component
 import "./fightPage.css";
 
 const FightPage = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Retrieve the Pokémon ID from URL parameter
+  const { id } = useParams();
   const [pokemonData, setPokemonData] = useState(null);
   const [opponentData, setOpponentData] = useState(null);
-  const [winner, setWinner] = useState("");
-  const [loser, setLoser] = useState("");
+  const [winner, setWinner] = useState(null);
+  const [loser, setLoser] = useState(null);
+  const [showFightText, setShowFightText] = useState(true); // State to control the visibility of "Fight" text
 
   const backgroundImage = [
     "1.jpg",
@@ -31,13 +30,6 @@ const FightPage = () => {
 
   const randomIndex = Math.floor(Math.random() * backgroundImage.length);
 
-  /*   function getRandomBackgroundImageUrl() {
-    const randomIndex = Math.floor(Math.random() * backgroundImage.length);
-    return backgroundImage[randomIndex];
-  }
-
-  const randomBackgroundUrl = getRandomBackgroundImageUrl(); */
-
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
@@ -56,7 +48,7 @@ const FightPage = () => {
 
     const fetchRandomPokemon = async () => {
       try {
-        const randomId = Math.floor(Math.random() * 898) + 1; // Generate random ID between 1 and 898
+        const randomId = Math.floor(Math.random() * 898) + 1;
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${randomId}`
         );
@@ -66,7 +58,6 @@ const FightPage = () => {
           );
         }
         const data = await response.json();
-        console.log("THE OPPONENT DATA: ", data);
         setOpponentData(data);
       } catch (error) {
         console.error(error);
@@ -74,13 +65,12 @@ const FightPage = () => {
     };
 
     if (id) {
-      fetchPokemonData(); // Fetch player's Pokémon data
-      fetchRandomPokemon(); // Fetch opponent's Pokémon data
+      fetchPokemonData();
+      fetchRandomPokemon();
     }
   }, [id]);
 
   const startFight = () => {
-    // Logic to start the fight
     const killTtimePokemon =
       opponentData.stats[0].base_stat /
       ((pokemonData.stats[5].base_stat * pokemonData.stats[1].base_stat) /
@@ -92,13 +82,18 @@ const FightPage = () => {
         (pokemonData.stats[2].base_stat / 230));
 
     if (killTtimePokemon - killTtimeOpponent < 0) {
-      setWinner(pokemonData);
       setLoser(opponentData);
+      setTimeout(() => {
+        setWinner(pokemonData);
+        setShowFightText(false); // Hide "Fight" text when winner is displayed
+      }, 1000); // Delay winner display after loser animation
     } else {
-      setWinner(opponentData);
       setLoser(pokemonData);
+      setTimeout(() => {
+        setWinner(opponentData);
+        setShowFightText(false); // Hide "Fight" text when winner is displayed
+      }, 1000); // Delay winner display after loser animation
     }
-    console.log("WINNER IS Chosen");
   };
 
   return (
@@ -109,67 +104,57 @@ const FightPage = () => {
         backgroundSize: "cover",
       }}
     >
-      <h1 className="fight-page-title">Fight</h1>
-      {pokemonData && opponentData ? (
-        <>
-          <div className="fight-content">
-            <div className="pokemon-card">
-              <h2 className="pokemon-name">{pokemonData.name}</h2>
-              <img
-                src={pokemonData.sprites.front_default}
-                alt={pokemonData.name}
-                className="pokemon-image"
-                width="150"
-                height="100"
-              />
-              {/* Display other details for player's Pokémon */}
-            </div>
-            <div className="pokemon-card">
-              <h2 className="opponent-name">{opponentData.name}</h2>
-              <img
-                src={opponentData.sprites.front_default}
-                alt={opponentData.name}
-                className="pokemon-image"
-                width="150"
-                height="100"
-              />
-              {/* Display other details for opponent's Pokémon */}
-            </div>
+      {showFightText && <h1 className="fight-page-title">Fight</h1>}
+      {pokemonData && opponentData && !winner && (
+        <div className="fight-content">
+          <div className={`pokemon-card ${loser ? "loser-animation" : ""}`}>
+            <h2 className="opponent-name">{opponentData.name}</h2>
+            <img
+              src={opponentData.sprites.front_default}
+              alt={opponentData.name}
+              className="pokemon-image"
+              width="150"
+              height="100"
+            />
           </div>
-          <div className="fight-page-button-container">
-            <button onClick={() => navigate("/")} className="back-button">
-              home
-            </button>
-            <button onClick={startFight} className="fight-button ">
-              Start Fight
-            </button>
-
-            {/* Link to HighScores component */}
-            <Link to="/HighScores" className="highscore-button ">
-              High Scores
-            </Link>
+          <div className={`pokemon-card ${winner ? "winner-animation" : ""}`}>
+            <h2 className="opponent-name">{pokemonData.name}</h2>
+            <img
+              src={pokemonData.sprites.front_default}
+              alt={pokemonData.name}
+              className="pokemon-image"
+              width="150"
+              height="100"
+            />
           </div>
-        </>
-      ) : (
-        <p>Loading...</p>
+        </div>
       )}
       {winner && (
-        <>
-          <div className="fight-content">
-            <div className="pokemon-card">
-              <h2 className="winner-page-title opponent-name">The Winner is</h2>
-              <h2 className="opponent-name">{winner.name}</h2>
-              <img
-                src={winner.sprites.front_default}
-                alt={winner.name}
-                className="pokemon-image"
-                width="150"
-                height="200"
-              />
-            </div>
-          </div>
-        </>
+        <div className={`pokemon-card ${winner ? "winner-animation" : ""}`}>
+          <h2 className="winner-page-title opponent-name">The Winner is</h2>
+          <h2 className="opponent-name">{winner.name}</h2>
+          <img
+            src={winner.sprites.front_default}
+            alt={winner.name}
+            className="pokemon-image"
+            width="150"
+            height="200"
+          />
+        </div>
       )}
+      <div className="fight-page-button-container">
+        <button onClick={() => navigate("/")} className="back-button">
+          home
+        </button>
+        {!winner && (
+          <button onClick={startFight} className="fight-button ">
+            Start Fight
+          </button>
+        )}
+        <Link to="/HighScores" className="highscore-button ">
+          High Scores
+        </Link>
+      </div>
     </div>
   );
 };
