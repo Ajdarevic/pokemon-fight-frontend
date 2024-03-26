@@ -12,7 +12,9 @@ const HighScores = () => {
     const fetchHighScores = async () => {
       try {
         // Replace this with actual API endpoint
-        const response = await fetch("https://example.com/high-scores");
+        const response = await fetch(
+          "https://pokemon-api-vmgy.onrender.com/fight-result"
+        );
         const data = await response.json();
         // Assuming the API returns an array of high scores
         setHighScores(data);
@@ -29,18 +31,15 @@ const HighScores = () => {
       <h1>High Scores</h1>
       <table className="highScores-container-table">
         <tr>
-          <th>playerName</th>
           <th>score</th>
           <th>winner</th>
           <th>loser</th>
         </tr>
-
-        <tr>
-          <td>playerName1</td>
-          <td>100</td>
-          <td>poke1</td>
-          <td>poke2</td>
-        </tr>
+        {highScores && (
+          <tr>
+            highscores.map( (item) )<td></td>
+          </tr>
+        )}
       </table>
 
       {/* {highScores.map((score, index) => (
