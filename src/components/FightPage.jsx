@@ -29,42 +29,33 @@ const FightPage = () => {
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        if (!response.ok) {
+        const responsePokemonData = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${id}`
+        );
+        if (!responsePokemonData.ok) {
           throw new Error(
-            `Error fetching details for Pokémon ${id}: ${response.statusText}`
+            `Error fetching details for Pokémon ${id}: ${responsePokemonData.statusText}`
           );
         }
-        const data = await response.json();
-        setPokemonData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchRandomPokemon = async () => {
-      try {
+        const dataPokemonData = await responsePokemonData.json();
+        setPokemonData(dataPokemonData);
         const randomId = Math.floor(Math.random() * 898) + 1;
-        const response = await fetch(
+        const responseRandomPokemon = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${randomId}`
         );
-        if (!response.ok) {
+        if (!responseRandomPokemon.ok) {
           throw new Error(
-            `Error fetching details for the random Pokémon: ${response.statusText}`
+            `Error fetching details for the random Pokémon: ${responseRandomPokemon.statusText}`
           );
         }
-        const data = await response.json();
-        setOpponentData(data);
+        const dataRandomPokemon = await responseRandomPokemon.json();
+        setOpponentData(dataRandomPokemon);
       } catch (error) {
         console.error(error);
       }
     };
-
-    if (id) {
-      fetchPokemonData();
-      fetchRandomPokemon();
-    }
-  }, [id]);
+    fetchPokemonData();
+  }, []);
 
   const startFight = () => {
     const killTtimePokemon =
